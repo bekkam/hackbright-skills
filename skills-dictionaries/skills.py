@@ -19,22 +19,9 @@ def without_duplicates(words):
         ...     ["Rose", "is", "a", "rose", "is", "a", "rose"]))
         ['Rose', 'a', 'is', 'rose']
 
-        An empty list should return an empty list:
-
-        >>> sorted(without_duplicates(
-        ...     []))
-        []
-
-    The function should work for a list containing integers:
-
-        >>> sorted(without_duplicates([111111, 2, 33333, 2]))
-        [2, 33333, 111111]
-
-
-
     """
 
-    return []
+    return set(words)
 
 
 def find_unique_common_items(list1, list2):
@@ -56,14 +43,9 @@ def find_unique_common_items(list1, list2):
         >>> sorted(find_unique_common_items([4, 3, 2, 1], [1, 1, 2, 2]))
         [1, 2]
 
-    The elements should not be treated as duplicates if they are different data types.
-
-        >>> sorted(find_unique_common_items(["2", "1", 2], [2, 1]))
-        [2]
-
     """
 
-    return []
+    return set(list1) & set(list2)
 
 
 def count_unique(input_string):
@@ -92,8 +74,18 @@ def count_unique(input_string):
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
 
     """
+    # get unique words in string
+    # for each unique word, count number of times it occurs in string
+    # add to dictionary, where key = unique words, value = number times it occured
 
-    return {}
+    uniq_dict = {}
+    input_list = input_string.split(" ")
+
+    uniq_words = set(input_list)
+
+    for word in uniq_words:
+        uniq_dict[word] = input_list.count(word)
+    return uniq_dict
 
 
 def translate_to_pirate_talk(phrase):
@@ -105,21 +97,26 @@ def translate_to_pirate_talk(phrase):
 
     Here's a table of English to Pirate translations:
 
-   English     Pirate
+    English     Pirate
     ----------  ----------------
     sir         matey
     hotel       fleabag inn
     student     swabbie
     boy         matey
+    madam       proud beauty
     professor   foul blaggart
     restaurant  galley
     your        yer
     excuse      arr
     students    swabbies
     are         be
+    lawyer      foul blaggart
+    the         th'
     restroom    head
     my          me
+    hello       avast
     is          be
+    man         matey
 
     For example:
 
@@ -133,8 +130,50 @@ def translate_to_pirate_talk(phrase):
         'me swabbie be not a man!'
 
     """
+    # create a dictionary with English as key, and Pirate as value
 
-    return ""
+    string = """    sir         matey
+    hotel       fleabag inn
+    student     swabbie
+    boy         matey
+    madam       proud beauty
+    professor   foul blaggart
+    restaurant  galley
+    your        yer
+    excuse      arr
+    students    swabbies
+    are         be
+    lawyer      foul blaggart
+    the         th'
+    restroom    head
+    my          me
+    hello       avast
+    is          be
+    man         matey"""
+
+    pirate_dict = {}
+    for line in string.split("\n"):
+        words = line.split(None)
+        if len(words) > 2:
+            # If there are three arguments after splitting the line, concat the 2nd and 3rd args -
+            # This is pretty gross, but I couldn't get a regex to capture the pirate words.
+            words[1] += " " + words[2]
+        pirate_dict[words[0]] = words[1]
+
+    result_list = []
+
+    # For each word in the argument, return the original word unless the term is in the
+    # pirate dictionary. If the word is in the pirate dictionary, return the
+    # pirate translation. Store the words to be returned in result_list.  Return result_list
+    # as a string, joined with a whitespace
+    for word in phrase.split():
+        if word in pirate_dict.keys():
+            result_word = pirate_dict.get(word)
+        else:
+            result_word = word
+        result_list.append(result_word)
+
+    return " ".join(result_list)
 
 
 def sort_by_word_length(words):
@@ -151,7 +190,21 @@ def sort_by_word_length(words):
 
     """
 
-    return []
+    # create an empty dictionary, word_dict.
+    # for each word in words, if word length is already a key, add word to the key's list of values
+    # else, create new key in form of (word length, [word])
+    # return word_dict.items() to return the key value pairs as a tuple
+    word_dict = {}
+
+    for word in words:
+        key = len(word)
+        if key in word_dict.keys():
+            value = word_dict.get(key)
+            word_dict[key] = value + [word]
+        else:
+            word_dict[key] = [word]
+
+    return word_dict.items()
 
 
 def get_sum_zero_pairs(input_list):
@@ -182,12 +235,44 @@ def get_sum_zero_pairs(input_list):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
+    # SOLUTION 1: Using set and comprehension
+    uniq_nums = set(input_list)
 
-    return []
+    result = []
 
+    pairs = [[-(num), num] for num in uniq_nums if num * -1 in uniq_nums]
+
+    for item in pairs:
+        if item[0] <= item[1]:
+            result.append((item[0], item[1]))
+
+    result.sort()
+    return result
+
+    # SOLUTION 2: Using filter and set
+    # filter input_list include only numbers that have their negative value also in input_list
+    # and bind the list to sums_to_zero
+    # bind the unique set of sums_to_zero to pairs
+    # for each number in set of pairs, append the number and its negative to the result list once
+    # sort the result list and return the result
+
+    """sums_to_zero = filter(lambda x: x * -1 in input_list, input_list)
+
+    pairs = set(sums_to_zero)
+
+    result = []
+
+    for num in pairs:
+        if [num, -(num)] not in result:
+            result.append([-(num), num])
+
+    result.sort()
+    return result
+    """
 
 ##############################################################################
 # You can ignore everything below this.
+
 
 def print_dict(d):
     # This method is just used to print dictionaries in key-alphabetical
