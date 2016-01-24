@@ -10,13 +10,29 @@
 
 
 <body>
-    <!-- your html goes here -->
     <h1>Job Application</h1>
-    <p>Please enter your name, salary requirement, and which job you are applying for.</p>
-
+    <p>Please enter your name, salary requirement, and the name of the job you are applying for.</p>
 
     <form action="/application" method="POST">
-        <input type="submit">
+
+        <label>First Name: <input type="text" name="firstname"></label>
+        <br>
+
+        <label>Last Name: <input type="text" name="lastname"></label>
+        <br>
+
+        <label>Salary Requirement: <input type="number" name="salary"></label>
+        <br>
+
+        Job: <select name="jobtype">
+            <label><option value="software">Software Engineer</option></label>
+            <label><option value="qa">QA Engineer</option></label>
+            <label><option value="manager">Product Manager</option></label>
+        </select>
+        <br>
+
+        <input type="submit" value="Submit">
+
     </form>
 
 </body>
