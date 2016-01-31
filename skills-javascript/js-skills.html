@@ -238,20 +238,6 @@
 
 <script>
   // code here for above problem
-  // var partFiveButton = $('tricky-to-find')
-  // console.log(partFiveButton);
-
-  // function partFiveAlertClick(evt) {
-  //   alert("Here is the popup for part 5!");
-  // }
-  
-  // for (var i = 0; i < )
-  // partFiveButton[0].change(partFiveAlertClick);
-
-  $('tricky-to-find').each(function(index) {
-    console.log(index + ":" + $(this).text());
-    alert("hi");
-  });
 
 </script>
 
@@ -319,6 +305,15 @@
 
 <script>
   // put your code here
+  var porcupineButton = $("#make-a-porcupine");
+  var porcupineImage = $("#cute-porcupine-image");
+
+  function showPorcupine(evt) {
+    setTimeout(function() { porcupineImage.fadeIn("slow"); }, 1000);
+  }
+
+  porcupineButton.on('click', showPorcupine);
+
 </script>
 
 <div class="hint">
