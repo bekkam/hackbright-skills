@@ -238,6 +238,21 @@
 
 <script>
   // code here for above problem
+  // var partFiveButton = $('tricky-to-find')
+  // console.log(partFiveButton);
+
+  // function partFiveAlertClick(evt) {
+  //   alert("Here is the popup for part 5!");
+  // }
+  
+  // for (var i = 0; i < )
+  // partFiveButton[0].change(partFiveAlertClick);
+
+  $('tricky-to-find').each(function(index) {
+    console.log(index + ":" + $(this).text());
+    alert("hi");
+  });
+
 </script>
 
 <div class="hint">
@@ -265,6 +280,12 @@
 
 <script>
   // put your code here
+  var image = $("#kittenz-rule");
+
+  image.dblclick(function() {
+    image.attr("src", 'https://i.ytimg.com/vi/b7ooB85bm8I/hqdefault.jpg');
+  });
+
 </script>
 
 <div class="hint">
