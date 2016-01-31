@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Skills-Javascript</title>
+  <script src="http://code.jquery.com/jquery.js"></script>
   <style>
     body {
       counter-reset: h3counter;
@@ -98,7 +99,15 @@
 
 <script>
   // code here for above problem
+  "use strict";
 
+  var alertButton = document.getElementById('popup-alert-button');
+
+  function alertClick() {
+    alert("Here's the popup you asked for!");
+  }
+
+  alertButton.addEventListener('click', alertClick);
 </script>
 
 
@@ -117,6 +126,14 @@
 
 <script>
   // code here for above-problem
+  var changeGreetingButton = document.getElementById('change-hello-to-goodbye-button');
+  var message = document.getElementById('message-to-change');
+
+  function changeGreeting() {
+      message.innerText = "goodbye";
+  }
+
+  changeGreetingButton.addEventListener('click', changeGreeting);
 </script>
 
 <div class="hint">
@@ -146,6 +163,14 @@
 
 <script>
   // code here for above problem
+  var form = document.getElementById('prevent-form-submission-form');
+
+  function preventSubmission(evt) {
+    evt.preventDefault();
+    alert("This alert prevents form submission.");
+  }
+
+  form.addEventListener('click', preventSubmission);
 </script>
 
 <div class="hint">
