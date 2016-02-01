@@ -145,12 +145,20 @@ including but not limited to, students from CA.
 
 -- 1. Select the name of any brand with more than 5 models in the database.
 
+    select brand_name from models
+    group by brand_name
+    having count(name) > 5;
+
 -- 2. Add the following rows to the Models table.
 
 -- year    name       brand_name
 -- ----    ----       ----------
 -- 2015    Chevrolet  Malibu
 -- 2015    Subaru     Outback
+
+
+    insert into models (year, name, brand_name) values (2015, 'Malibu', 'Chevrolet');
+    insert into models (year, name, brand_name) values (2015, 'Outback', 'Subaru');
 
 -- 3. Write a SQL statement to crate a table called `Awards`
 --    with columns `name`, `year`, and `winner`. Choose
